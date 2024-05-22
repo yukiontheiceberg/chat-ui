@@ -3,7 +3,7 @@ import type { ChatTemplateInput } from "$lib/types/Template";
 import { compileTemplate } from "$lib/utils/template";
 import { z } from "zod";
 import endpoints, { endpointSchema, type Endpoint } from "./endpoints/endpoints";
-import endpointTgi from "./endpoints/tgi/endpointTgi";
+import { endpointTgi } from "./endpoints/tgi/endpointTgi";
 import { sum } from "$lib/utils/sum";
 import { embeddingModels, validateEmbeddingModelByName } from "./embeddingModels";
 
@@ -159,6 +159,8 @@ const addEndpoint = (m: Awaited<ReturnType<typeof processModel>>) => ({
 						return endpoints.tgi(args);
 					case "anthropic":
 						return endpoints.anthropic(args);
+					case "anthropic-vertex":
+						return endpoints.anthropicvertex(args);
 					case "aws":
 						return await endpoints.aws(args);
 					case "openai":
